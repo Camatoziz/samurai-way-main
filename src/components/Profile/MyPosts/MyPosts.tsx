@@ -6,6 +6,7 @@ import {NewPost} from './NewPost/NewPost';
 export const MyPosts = () => {
     return (
         <div className={s.myPosts}>
+            <h3>My posts</h3>
             <NewPost/>
             <Post likescount={15} message='Hi, how are you?' />
             <Post likescount={27} message="It's my first post." />

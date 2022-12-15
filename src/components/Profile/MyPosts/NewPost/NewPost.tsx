@@ -1,11 +1,15 @@
 import React from 'react';
 import s from './NewPost.module.css'
 
-export const NewPost=()=>{
-    return(
+export const NewPost = () => {
+    return (
         <div className={s.newPost}>
-            <textarea></textarea>
-            <button>Post</button>
+            <div>
+                <textarea></textarea>
+            </div>
+            <div>
+                <button>Post</button>
+            </div>
         </div>
     )
 }
