@@ -1,7 +1,22 @@
 .profileInfo img {
-    width: 800px;
-  }
+    width: 1050px;
+    margin: 25px 25px 0px 25px;
+    border-radius: 10px;
+      }
+
+.descriptionBlock {
+
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    padding: 10px;
+    margin-left: 25px;
+    align-items: end;
+}
+.descriptionBlock img {
+    width: 150px;
+    border-radius: 20px;
+    }
 
 .description {
-    padding: 10px;
+   font-size: 25px;
 }
