@@ -5,7 +5,7 @@ export const NewPost = () => {
     return (
         <div className={s.newPost}>
             <div>
-                <textarea></textarea>
+                <input />
             </div>
             <div>
                 <button>Post</button>

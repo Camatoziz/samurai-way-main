@@ -2,14 +2,19 @@ import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
 import {NewPost} from './NewPost/NewPost';
+import {ProfileType} from '../Profile';
 
-export const MyPosts = () => {
+
+
+
+
+export const MyPosts = (props: ProfileType) => {
+    let posts = props.postItems.map(p=><Post message={p.message} count={p.count}/>)
     return (
         <div className={s.myPosts}>
             <h3>My posts</h3>
             <NewPost/>
-            <Post likescount={15} message='Hi, how are you?' />
-            <Post likescount={27} message="It's my first post." />
+            {posts}
         </div>
     )
 }

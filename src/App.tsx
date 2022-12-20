@@ -9,20 +9,45 @@ import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import styled from 'styled-components';
+import {PostPropsType} from './components/Profile/MyPosts/Post/Post';
+import {DialogType} from './components/Dialogs/DialogItem/DialogItem';
+import {MessageType} from './components/Dialogs/MessageItem/Message';
 
+type StateType = {
+    state: {
+        profilePage: {
+            postItems: PostPropsType[]
+        },
+        dialogsPage: {
+            dialogItems: DialogType[]
+            messageItems: MessageType[]
+        }
+    }
+}
 
-function App() {
+/*export type AppPropsType = {
+    dialogItems: DialogType[]
+    messageItems: MessageType[]
+    postItems: PostPropsType[]
+    }*/
+
+function App(props: StateType) {
     return (
         <BrowserRouter>
             <Main className="app-wrapper">
                 <Header/>
                 <Nav/>
                 <AppWrapper className="app-wrapper-content">
-                    <Route path="/profile" component={Profile}/>
-                    <Route path="/dialogs" component={Dialogs}/>
-                    <Route path="/news" component={News}/>
-                    <Route path="/music" component={Music}/>
-                    <Route path="/settings" component={Settings}/>
+                    <Route path="/profile"
+                           render={() =>
+                               <Profile postItems={props.state.profilePage.postItems}/>}/>
+                    <Route path="/dialogs"
+                           render={() =>
+                               <Dialogs dialogItems={props.state.dialogsPage.dialogItems}
+                                        messageItems={props.state.dialogsPage.messageItems}/>}/>
+                    <Route path="/news" render={News}/>
+                    <Route path="/music" render={Music}/>
+                    <Route path="/settings" render={Settings}/>
                 </AppWrapper>
 
             </Main>
@@ -32,7 +57,7 @@ function App() {
 
 export default App;
 
-const Main = styled.div `
+const Main = styled.div`
   display: grid;
   grid-template-areas:
     'h h'
@@ -43,7 +68,7 @@ const Main = styled.div `
   margin: 0 auto;
   background-color: #dee2e6;
 `
-const AppWrapper = styled.div `
+const AppWrapper = styled.div`
   grid-area: c;
   background-color: #edeff1;
   display: grid;
