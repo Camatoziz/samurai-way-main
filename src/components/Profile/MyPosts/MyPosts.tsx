@@ -8,12 +8,13 @@ import {ProfileType} from '../Profile';
 
 
 
+
 export const MyPosts = (props: ProfileType) => {
-    let posts = props.postItems.map(p=><Post message={p.message} count={p.count}/>)
+    let posts = props.postItems.map(p=><Post id={p.id} message={p.message} count={p.count}/>)
     return (
         <div className={s.myPosts}>
             <h3>My posts</h3>
-            <NewPost/>
+            <NewPost addPost={props.addPost}/>
             {posts}
         </div>
     )

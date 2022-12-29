@@ -9,6 +9,9 @@ export const Nav = () => {
                 <NavLink to='/profile' activeClassName={s.active}>Profile</NavLink>
             </div>
             <div className={s.item}>
+                <NavLink to='/friends' activeClassName={s.active}>Friends</NavLink>
+            </div>
+            <div className={s.item}>
                 <NavLink to='/dialogs' activeClassName={s.active}>Messages</NavLink>
             </div>
             <div className={s.item}>

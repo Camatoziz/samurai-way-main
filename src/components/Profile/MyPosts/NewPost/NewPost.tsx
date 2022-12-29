@@ -1,14 +1,23 @@
 import React from 'react';
 import s from './NewPost.module.css'
 
-export const NewPost = () => {
+type NewPostType = {
+    addPost: (text: any)=>void
+}
+
+export const NewPost = (props: NewPostType) => {
+    let addNewTextareaRef = React.createRef<HTMLInputElement>()
+    const onclickHandler = () => {
+        const text = addNewTextareaRef.current?.value
+        props.addPost(text)
+    }
     return (
         <div className={s.newPost}>
             <div>
-                <input />
+                <input ref={addNewTextareaRef}/>
             </div>
             <div>
-                <button>Post</button>
+                <button onClick={onclickHandler}>Post</button>
             </div>
         </div>
     )

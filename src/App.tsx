@@ -12,6 +12,8 @@ import styled from 'styled-components';
 import {PostPropsType} from './components/Profile/MyPosts/Post/Post';
 import {DialogType} from './components/Dialogs/DialogItem/DialogItem';
 import {MessageType} from './components/Dialogs/MessageItem/Message';
+import Friends, {FriendType} from './components/Friends/Friends';
+
 
 type StateType = {
     state: {
@@ -21,8 +23,12 @@ type StateType = {
         dialogsPage: {
             dialogItems: DialogType[]
             messageItems: MessageType[]
+        },
+        friendsPage: {
+            friendsItems: FriendType[]
         }
     }
+    addPost: (text: string|undefined )=>void
 }
 
 /*export type AppPropsType = {
@@ -40,7 +46,8 @@ function App(props: StateType) {
                 <AppWrapper className="app-wrapper-content">
                     <Route path="/profile"
                            render={() =>
-                               <Profile postItems={props.state.profilePage.postItems}/>}/>
+                               <Profile postItems={props.state.profilePage.postItems} addPost={props.addPost}/>}/>
+                    <Route path="/friends" render={() => <Friends friendsItems={props.state.friendsPage.friendsItems}/>}/>
                     <Route path="/dialogs"
                            render={() =>
                                <Dialogs dialogItems={props.state.dialogsPage.dialogItems}

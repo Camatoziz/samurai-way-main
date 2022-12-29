@@ -6,13 +6,14 @@ import {PostPropsType} from './MyPosts/Post/Post';
 
 export type ProfileType = {
     postItems: PostPropsType[]
+    addPost: (text: any)=>void
 }
 
 export const Profile = (props: ProfileType) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts postItems={props.postItems}/>
+            <MyPosts addPost={props.addPost} postItems={props.postItems}/>
 
         </div>
     )
