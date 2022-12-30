@@ -9,33 +9,9 @@ import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import styled from 'styled-components';
-import {PostPropsType} from './components/Profile/MyPosts/Post/Post';
-import {DialogType} from './components/Dialogs/DialogItem/DialogItem';
-import {MessageType} from './components/Dialogs/MessageItem/Message';
-import Friends, {FriendType} from './components/Friends/Friends';
+import Friends from './components/Friends/Friends';
+import {StateType} from './Redux/state';
 
-
-type StateType = {
-    state: {
-        profilePage: {
-            postItems: PostPropsType[]
-        },
-        dialogsPage: {
-            dialogItems: DialogType[]
-            messageItems: MessageType[]
-        },
-        friendsPage: {
-            friendsItems: FriendType[]
-        }
-    }
-    addPost: (text: string|undefined )=>void
-}
-
-/*export type AppPropsType = {
-    dialogItems: DialogType[]
-    messageItems: MessageType[]
-    postItems: PostPropsType[]
-    }*/
 
 function App(props: StateType) {
     return (

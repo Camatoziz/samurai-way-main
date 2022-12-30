@@ -1,8 +1,53 @@
 import {v1} from 'uuid';
-import {rerenderEntireTree} from '../index';
+import {rerenderEntireTree} from '../render';
 
 
-export let state = {
+
+
+export type PostType = {
+    id: string
+    message:string
+    count: number
+}
+
+export type DialogType = {
+    id: string
+    name: string
+}
+
+export type MessageType = {
+    message: string
+}
+
+export type FriendType = {
+    id: string
+    name: string
+    age: number
+    img: string
+}
+
+
+export type StateType = {
+    state: {
+        profilePage: {
+            postItems: PostType[]
+        },
+        dialogsPage: {
+            dialogItems: DialogType[]
+            messageItems: MessageType[]
+        },
+        friendsPage: {
+            friendsItems: FriendType[]
+        }
+    }
+    addPost?: (text: string )=>void
+}
+
+
+
+
+
+export let state: StateType = {
     profilePage: {
         postItems:[
             {id: v1(), message:'Hi, how are you?', count: 15 },
@@ -36,7 +81,7 @@ export let state = {
 
 }
 
-export const addPost = (text: any) => {
+export const addPost = (text: string) => {
     debugger
     const newPost = {id: v1(), message: text, count: 0 }
     state= {...state, profilePage: {...state.profilePage, postItems: [newPost, ...state.profilePage.postItems]}}
