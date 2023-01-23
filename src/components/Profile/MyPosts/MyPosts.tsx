@@ -3,6 +3,7 @@ import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
 import {NewPost} from './NewPost/NewPost';
 import {ProfileType} from '../Profile';
+import {updateNewPostText} from '../../../Redux/state';
 
 
 
@@ -14,7 +15,7 @@ export const MyPosts = (props: ProfileType) => {
     return (
         <div className={s.myPosts}>
             <h3>My posts</h3>
-            <NewPost addPost={props.addPost}/>
+            <NewPost newPostText={props.newPostText} updateNewPostText={props.updateNewPostText} addPost={props.addPost}/>
             {posts}
         </div>
     )

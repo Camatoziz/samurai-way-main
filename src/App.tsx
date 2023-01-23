@@ -10,10 +10,13 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import styled from 'styled-components';
 import Friends from './components/Friends/Friends';
-import {StateType} from './Redux/state';
+import {addPost, StateType, updateNewPostText} from './Redux/state';
 
+type AppPropsType = {
+    state: StateType
+}
 
-function App(props: StateType) {
+function App(props: AppPropsType) {
     return (
         <BrowserRouter>
             <Main className="app-wrapper">
@@ -22,8 +25,13 @@ function App(props: StateType) {
                 <AppWrapper className="app-wrapper-content">
                     <Route path="/profile"
                            render={() =>
-                               <Profile postItems={props.state.profilePage.postItems} addPost={props.addPost}/>}/>
-                    <Route path="/friends" render={() => <Friends friendsItems={props.state.friendsPage.friendsItems}/>}/>
+                               <Profile
+                                   postItems={props.state.profilePage.postItems}
+                                   newPostText={props.state.profilePage.newPostText}
+                                   addPost={addPost}
+                                   updateNewPostText={updateNewPostText}/>}/>
+                    <Route path="/friends"
+                           render={() => <Friends friendsItems={props.state.friendsPage.friendsItems}/>}/>
                     <Route path="/dialogs"
                            render={() =>
                                <Dialogs dialogItems={props.state.dialogsPage.dialogItems}

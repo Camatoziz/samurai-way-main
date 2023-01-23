@@ -7,9 +7,9 @@ import {addPost, StateType} from './Redux/state';
 
 
 
-export const rerenderEntireTree = (props: StateType) =>{
+export const rerenderEntireTree = (state: StateType) =>{
     ReactDOM.render(
-        <App state={props.state} addPost={addPost}/>,
+        <App state={state} />,
         document.getElementById('root')
     );
 }
