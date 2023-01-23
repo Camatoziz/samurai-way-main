@@ -14,6 +14,8 @@ import {addPost, StateType, updateNewPostText} from './Redux/state';
 
 type AppPropsType = {
     state: StateType
+    addPost: ()=>void
+    updateNewPostText: (text: string)=>void
 }
 
 function App(props: AppPropsType) {
@@ -28,8 +30,8 @@ function App(props: AppPropsType) {
                                <Profile
                                    postItems={props.state.profilePage.postItems}
                                    newPostText={props.state.profilePage.newPostText}
-                                   addPost={addPost}
-                                   updateNewPostText={updateNewPostText}/>}/>
+                                   addPost={props.addPost}
+                                   updateNewPostText={props.updateNewPostText}/>}/>
                     <Route path="/friends"
                            render={() => <Friends friendsItems={props.state.friendsPage.friendsItems}/>}/>
                     <Route path="/dialogs"
