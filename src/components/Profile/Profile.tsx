@@ -6,7 +6,7 @@ import {PostType, updateNewPostText} from '../../Redux/state';
 
 export type ProfileType = {
     postItems: PostType[]
-    addPost: (text: string)=>void
+    addPost: ()=>void
 
     updateNewPostText: (text: string)=>void
     newPostText: string

@@ -3,7 +3,7 @@ import s from './NewPost.module.css'
 import {updateNewPostText} from '../../../../Redux/state';
 
 type NewPostType = {
-    addPost: (text: string )=>void
+    addPost: ()=>void
     newPostText: string
     updateNewPostText: (text: string)=>void
 }
@@ -11,10 +11,7 @@ type NewPostType = {
 export const NewPost = (props: NewPostType) => {
     let addNewTextareaRef = React.createRef<HTMLTextAreaElement>()
     const onclickHandler = () => {
-        if(addNewTextareaRef.current){
-            props.addPost(addNewTextareaRef.current.value)
-            props.updateNewPostText('')
-        }
+        props.addPost()
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>)=>{
         props.updateNewPostText(e.currentTarget.value)

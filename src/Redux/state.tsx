@@ -108,9 +108,10 @@ export let state: StateType = {
 
 }
 
-export const addPost = (text: string) => {
-       const newPost = {id: v1(), message: text, count: 0}
+export const addPost = () => {
+       const newPost = {id: v1(), message: state.profilePage.newPostText, count: 0}
     state = {...state, profilePage: {...state.profilePage, postItems: [newPost, ...state.profilePage.postItems]}}
+    state = {...state, profilePage: {...state.profilePage, newPostText: ''}}
     rerenderEntireTree(state)
 }
 
