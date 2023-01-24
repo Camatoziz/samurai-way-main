@@ -10,7 +10,7 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import styled from 'styled-components';
 import Friends from './components/Friends/Friends';
-import {addPost, StateType, updateNewPostText} from './Redux/state';
+import { StateType,} from './Redux/state';
 
 type AppPropsType = {
     state: StateType
