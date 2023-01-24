@@ -7,9 +7,9 @@ import {StateType, store} from './Redux/state';
 
 
 
-export const rerenderEntireTree = (state: StateType) =>{
+export const rerenderEntireTree = (state: any) =>{
     ReactDOM.render(
-        <App state={store.getState()} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}/>,
+        <App state={state} dispatch={store.dispatch.bind(store)}/>,
         document.getElementById('root')
     );
 }

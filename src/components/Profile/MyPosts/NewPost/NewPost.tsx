@@ -1,20 +1,22 @@
 import React, {ChangeEvent} from 'react';
 import s from './NewPost.module.css'
+import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../../Redux/state';
 
 
 type NewPostType = {
-    addPost: ()=>void
     newPostText: string
-    updateNewPostText: (text: string)=>void
+    dispatch: (action: any) => void
 }
+
+
 
 export const NewPost = (props: NewPostType) => {
     let addNewTextareaRef = React.createRef<HTMLTextAreaElement>()
-    const onclickHandler = () => {
-        props.addPost()
+    const addPost = () => {
+        props.dispatch(addPostActionCreator())
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>)=>{
-        props.updateNewPostText(e.currentTarget.value)
+        props.dispatch(updateNewPostTextActionCreator(e.currentTarget.value))
     }
 
     return (
@@ -23,7 +25,7 @@ export const NewPost = (props: NewPostType) => {
                 <textarea value={props.newPostText} onChange={onChangeHandler} ref={addNewTextareaRef}/>
             </div>
             <div>
-                <button onClick={onclickHandler}>Post</button>
+                <button onClick={addPost}>Post</button>
             </div>
         </div>
     )

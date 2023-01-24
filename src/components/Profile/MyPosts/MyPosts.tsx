@@ -15,8 +15,9 @@ export const MyPosts = (props: ProfileType) => {
     return (
         <div className={s.myPosts}>
             <h3>My posts</h3>
-            <NewPost newPostText={props.newPostText} updateNewPostText={props.updateNewPostText} addPost={props.addPost}/>
+            <NewPost newPostText={props.newPostText} dispatch={props.dispatch}/>
             {posts}
+
         </div>
     )
 }

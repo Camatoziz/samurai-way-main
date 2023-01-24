@@ -10,12 +10,11 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import styled from 'styled-components';
 import Friends from './components/Friends/Friends';
-import { StateType,} from './Redux/state';
+import {StateType,} from './Redux/state';
 
 type AppPropsType = {
     state: StateType
-    addPost: ()=>void
-    updateNewPostText: (text: string)=>void
+    dispatch: (action: any) => void
 }
 
 function App(props: AppPropsType) {
@@ -30,14 +29,17 @@ function App(props: AppPropsType) {
                                <Profile
                                    postItems={props.state.profilePage.postItems}
                                    newPostText={props.state.profilePage.newPostText}
-                                   addPost={props.addPost}
-                                   updateNewPostText={props.updateNewPostText}/>}/>
+                                   dispatch={props.dispatch}
+                               />}/>
                     <Route path="/friends"
                            render={() => <Friends friendsItems={props.state.friendsPage.friendsItems}/>}/>
                     <Route path="/dialogs"
                            render={() =>
                                <Dialogs dialogItems={props.state.dialogsPage.dialogItems}
-                                        messageItems={props.state.dialogsPage.messageItems}/>}/>
+                                        messageItems={props.state.dialogsPage.messageItems}
+                                        newMessageText={props.state.dialogsPage.newMessageText}
+                                        dispatch={props.dispatch}
+                               />}/>
                     <Route path="/news" render={News}/>
                     <Route path="/music" render={Music}/>
                     <Route path="/settings" render={Settings}/>

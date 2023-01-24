@@ -1,7 +1,6 @@
 import {v1} from 'uuid';
 
 
-
 export type PostType = {
     id: string
     message: string
@@ -34,6 +33,7 @@ export type StateType = {
     dialogsPage: {
         dialogItems: DialogType[]
         messageItems: MessageType[]
+        newMessageText: ''
     },
     friendsPage: {
         friendsItems: FriendType[]
@@ -41,9 +41,16 @@ export type StateType = {
 
 }
 
+
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
+
 export let store = {
-    _callSubscriber(state: StateType){},
-    _state:   {
+    _callSubscriber(state: any) {
+    },
+    _state: {
         profilePage: {
             postItems: [
                 {id: v1(), message: 'Hi, how are you?', count: 15},
@@ -64,7 +71,8 @@ export let store = {
                 {message: 'Hi, how are you?'},
                 {message: 'OK, and u?'},
                 {message: 'YO'}
-            ]
+            ],
+            newMessageText: ''
         },
         friendsPage: {
             friendsItems: [
@@ -108,20 +116,39 @@ export let store = {
         }
 
     },
-    getState(){
+
+    getState() {
         return this._state
     },
-    addPost(){
-        const newPost = {id: v1(), message: this._state.profilePage.newPostText, count: 0}
-        this._state = {...this._state, profilePage: {...this._state.profilePage, postItems: [newPost, ...this._state.profilePage.postItems]}}
-        this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: ''}}
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(text: string){
-        this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: text}}
-        this._callSubscriber(this._state)
-    },
-    subscriber(observer:(state: StateType)=>void){
+    subscriber(observer: (state: StateType) => void) {
         this._callSubscriber = observer
+    },
+
+    dispatch(action: any) {
+        if (action.type === ADD_POST) {
+            const newPost = {id: v1(), message: this._state.profilePage.newPostText, count: 0}
+            this._state = {
+                ...this._state,
+                profilePage: {...this._state.profilePage, postItems: [newPost, ...this._state.profilePage.postItems]}
+            }
+            this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: ''}}
+            this._callSubscriber(this._state)
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: action.text}}
+            this._callSubscriber(this._state)
+        } else if (action.type === UPDATE_MESSAGE_TEXT) {
+            this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, newMessageText: action.text}}
+            this._callSubscriber(this._state)
+        } else if (action.type===ADD_MESSAGE){
+            const newMessage = {message: this._state.dialogsPage.newMessageText}
+            this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, messageItems: [...this._state.dialogsPage.messageItems, newMessage]}}
+            this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, newMessageText: ''}}
+            this._callSubscriber(this._state)
+        }
     }
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, text: text})
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
+export const updateMessageTextActionCreator = (text: string) => ({type: UPDATE_MESSAGE_TEXT, text: text})
